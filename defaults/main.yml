@@ -1,0 +1,26 @@
+---
+# defaults file for cron role
+
+# Default crontab file lines
+role_cron_etc_crontab_lines: []
+
+# Users who should be allowed to cron
+role_cron_user_whitelist: []
+
+# Users who should be denied from cron
+role_cron_user_blacklist: []
+
+# cron.hourly scripts
+role_cron_hourly_scripts: []
+
+# cron.daily scripts
+role_cron_daily_scripts: []
+
+# cron.weekly scripts
+role_cron_weekly_scripts: []
+
+# cron.monthly scripts
+role_cron_monthly_scripts: []
+
+# User crontab files
+role_cron_user_scripts: []

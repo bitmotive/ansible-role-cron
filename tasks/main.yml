@@ -1,0 +1,86 @@
+---
+# tasks file for cron role
+
+- name: Configure /etc/crontab defaults
+  lineinfile: >
+    dest=/etc/crontab
+    line={{ item }}
+    owner=root
+    group=root
+    mode=0644
+  with_items: {{ role_cron_etc_crontab_lines }}
+  tags:
+    - cron
+    - crontab
+
+- name: Set user whitelist in cron.allow
+  lineinfile: >
+    dest=/etc/cron.allow
+    line={{ item }}
+    owner=root
+    group=root
+    mode=0600
+  with_items: {{ role_cron_user_whitelist }}
+  tags:
+    - cron
+    - cronallow
+
+- name: Set user blacklist in cron.deny
+  lineinfile: >
+    dest=/etc/cron.deny
+    line={{ item }}
+    owner=root
+    group=root
+    mode=0600
+  with_items: {{ role_cron_user_blacklist }}
+  tags:
+    - cron
+    - crondeny
+
+- name: Copy cron.hourly scripts
+  copy: >
+    src=etc/cron.hourly/{{ item }}
+    dest=/etc/cron.hourly/{{ item }}
+    owner=root
+    group=root
+    mode=0755
+  with_items: {{ role_cron_hourly_scripts }}
+  tags:
+    - cron
+    - cronhourly
+
+- name: Copy cron.daily scripts
+  copy: >
+    src=etc/cron.daily/{{ item }}
+    dest=/etc/cron.daily/{{ item }}
+    owner=root
+    group=root
+    mode=0755
+  with_items: {{ role_cron_daily_scripts }}
+  tags:
+    - cron
+    - crondaily
+
+- name: Copy cron.monthly scripts
+  copy: >
+    src=etc/cron.monthly/{{ item }}
+    dest=/etc/cron.monthly/{{ item }}
+    owner=root
+    group=root
+    mode=0755
+  with_items: {{ role_cron_monthly_scripts }}
+  tags:
+    - cron
+    - cronmonthly
+
+- name: Copy user cron scripts
+  copy: >
+    src=var/spool/cron/{{ item }}
+    dest=/var/spool/cron/{{ item }}
+    owner=root
+    group=root
+    mode=0755
+  with_items: {{ role_cron_user_scripts }}
+  tags:
+    - cron
+    - cronusers
