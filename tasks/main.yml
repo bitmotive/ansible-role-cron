@@ -8,7 +8,7 @@
     owner=root
     group=root
     mode=0644
-  with_items: {{ role_cron_etc_crontab_lines }}
+  with_items: role_cron_etc_crontab_lines
   tags:
     - cron
     - crontab
@@ -20,7 +20,9 @@
     owner=root
     group=root
     mode=0600
-  with_items: {{ role_cron_user_whitelist }}
+    create=yes
+    state=present
+  with_items: role_cron_user_whitelist
   tags:
     - cron
     - cronallow
@@ -32,7 +34,7 @@
     owner=root
     group=root
     mode=0600
-  with_items: {{ role_cron_user_blacklist }}
+  with_items: role_cron_user_blacklist
   tags:
     - cron
     - crondeny
@@ -44,7 +46,7 @@
     owner=root
     group=root
     mode=0755
-  with_items: {{ role_cron_hourly_scripts }}
+  with_items: role_cron_hourly_scripts
   tags:
     - cron
     - cronhourly
@@ -56,7 +58,7 @@
     owner=root
     group=root
     mode=0755
-  with_items: {{ role_cron_daily_scripts }}
+  with_items: role_cron_daily_scripts
   tags:
     - cron
     - crondaily
@@ -68,7 +70,7 @@
     owner=root
     group=root
     mode=0755
-  with_items: {{ role_cron_monthly_scripts }}
+  with_items: role_cron_monthly_scripts
   tags:
     - cron
     - cronmonthly
@@ -80,7 +82,7 @@
     owner=root
     group=root
     mode=0755
-  with_items: {{ role_cron_user_scripts }}
+  with_items: role_cron_user_scripts
   tags:
     - cron
     - cronusers
